@@ -25,7 +25,6 @@ client.once('ready', () => {
 	//	channel.send('testing');
 	//}
 	//);
-	//
 });
 
 client.on('interactionCreate', async interaction => {
