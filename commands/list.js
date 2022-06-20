@@ -16,7 +16,9 @@ module.exports = {
             userId = userTarget.id;
             name = userTarget.username;
         }
+
         userId = Long.fromString(userId);
+
         const client = new MongoClient(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
         client.connect(err => {
             const collection = client.db("root").collection("users");
@@ -26,10 +28,15 @@ module.exports = {
                 } else {
                     const anime_list = result.anime_list;
                     let anime_list_string = "";
-                    for (let i = 0; i < anime_list.length; i++) {
+                    const nLen = anime_list.length;
+                    for (let i = 0; i < nLen; i++) {
                         anime_list_string += anime_list[i] + "\n";
                     }
-                    interaction.reply(userTarget ? `***${name}'s anime list: ***\n${anime_list_string}` : `***Your anime list: ***\n${anime_list_string}`);
+                    if (userTarget) {
+                        interaction.reply({ content: `***${name}'s anime list:\n${anime_list_string}***`, ephemeral: false });
+                    } else {
+                        interaction.reply({ content: `***Your anime list:\n${anime_list_string}***`, ephemeral: true });
+                    }
                     client.close();
                 }
             });

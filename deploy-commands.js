@@ -13,11 +13,16 @@ for (const file of commandFiles) {
 	const command = require(filePath);
 	commands.push(command.data.toJSON());
 }
+function sleep(ms) {
+	return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 const rest = new REST({ version: '9' }).setToken(token);
 
 guildIds.forEach((guildId) => {
-	rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
-		.then(() => console.log('Successfully registered application commands for guild ' + guildId))
-		.catch(console.error);
+	sleep(2000).then(() => {
+		rest.put(Routes.applicationGuildCommands(clientId, guildId), { body: commands })
+			.then(() => console.log('Successfully registered application commands for guild ' + guildId))
+			.catch(console.error);
+	});
 });
