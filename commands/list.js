@@ -6,7 +6,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('list')
         .setDescription('Shows your anime list or someone else\'s')
-        .addUserOption(option => option.setName('target').setDescription('The user\'s avatar to show')),
+        .addUserOption(option => option.setName('target').setDescription('The user\'s anime list to display.')),
     async execute(interaction) {
         const userTarget = interaction.options.getUser('target');
         let name = "";
