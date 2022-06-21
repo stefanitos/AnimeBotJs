@@ -29,14 +29,12 @@ module.exports = {
                     const anime_list = result.anime_list;
                     let anime_list_string = "";
                     const nLen = anime_list.length;
+                    if (nLen == 0) userTarget ? interaction.reply(`${name}'s anime list is empty.`) : interaction.reply("Your anime list is empty.");
                     for (let i = 0; i < nLen; i++) {
                         anime_list_string += anime_list[i] + "\n";
                     }
-                    if (userTarget) {
-                        interaction.reply({ content: `***${name}'s anime list:\n${anime_list_string}***`, ephemeral: false });
-                    } else {
-                        interaction.reply({ content: `***Your anime list:\n${anime_list_string}***`, ephemeral: true });
-                    }
+                    if (userTarget) return interaction.reply({ content: `***${name}'s anime list:\n${anime_list_string}***`, ephemeral: false });
+                    interaction.reply({ content: `***Your anime list:\n${anime_list_string}***`, ephemeral: true });
                     client.close();
                 }
             });
