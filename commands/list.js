@@ -3,6 +3,7 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { MongoClient, ServerApiVersion, Long } = require('mongodb');
 
 module.exports = {
+    //info : {ownerOnly : true},
     data: new SlashCommandBuilder()
         .setName('list')
         .setDescription('Shows your anime list or someone else\'s')
@@ -28,7 +29,7 @@ module.exports = {
             const collection = client.db("root").collection("users");
             collection.findOne({ id: userId }, (err, result) => {
                 if (err) {
-                    console.log(err);
+                    console.error(err);
                 } else {
                     const anime_list = result.anime_list;
                     let anime_list_string = "";

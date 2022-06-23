@@ -13,6 +13,7 @@ for (const file of commandFiles) {
 	const command = require(filePath);
 	commands.push(command.data.toJSON());
 }
+
 function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
